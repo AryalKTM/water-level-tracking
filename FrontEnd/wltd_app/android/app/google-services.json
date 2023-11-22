@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "559405015020",
+    "firebase_url": "https://water-level-tracking-c7d82-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "water-level-tracking-c7d82",
+    "storage_bucket": "water-level-tracking-c7d82.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559405015020:android:ebb86814744f79c0faaac9",
+        "android_client_info": {
+          "package_name": "com.example.wltd_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "559405015020-07oee8sgk3ep9kbt2ho7g6h7n090iovd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLwcxsWKhySEI3KL7PEUd4RK-7v1eCEJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "559405015020-07oee8sgk3ep9kbt2ho7g6h7n090iovd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "559405015020-kki29a3p8hjjh6nburod35vs6j6o16kl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.ledDemo.RunnerTests"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
