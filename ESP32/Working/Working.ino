@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <WiFi.h>
 #include <Firebase_ESP_Client.h>
-// #include <FirebaseJson.h>
+#include <FirebaseJson.h>
 #include <WiFiClient.h>
 #include "time.h"
 #include <WiFiUdp.h>
@@ -19,8 +19,8 @@ NTPClient timeClient(ntpUDP, ntpServer, gmtOffset_sec);
 #include "addons/RTDBHelper.h"
 
 // Insert your network credentials
-#define WIFI_SSID "aryalktm_2.4"
-#define WIFI_PASSWORD "9841613846"
+#define WIFI_SSID "Luminr.co_2.4"
+#define WIFI_PASSWORD "barp.inc"
 
 // Insert Firebase project API Key
 #define API_KEY "AIzaSyCR9mTEFhGj0wdd5rHs7zimyDRN373OsJI"
@@ -33,8 +33,6 @@ NTPClient timeClient(ntpUDP, ntpServer, gmtOffset_sec);
 FirebaseData fbdo;
 FirebaseAuth auth;
 FirebaseConfig config;
-// FirebaseJson json;
-// String jsonString;
 
 unsigned long sendDataPrevMillis = 0;
 int count = 0;
@@ -43,10 +41,9 @@ bool signupOK = false;
 int trigger_pin = 5;
 int echo_pin = 18;
 int LED = 2;
-int relay = 12;
+int relay = 15;
 int unix_time;
 int distance_cm;
-int temp_cm;
 double depth_cm;
 int safe_distance = 15;
 int relay_status;
@@ -146,35 +143,17 @@ void relayControl() {
   }
 }
 
-void getRelayStatus() {
-  relay_status = Firebase.RTDB.getInt(&fbdo, "/test/relay_status");
-}
-
-void setup() {
-  serialSetup();
-  wifiSetup();
-  timeSetup();
-  firebaseSetup();
-}
-
-void loop() {
-  relayControl();
-  FirebaseAuth auth;
-  FirebaseJson json;
-  timeClient.update();
-  unsigned long currentTime = timeClient.getEpochTime();
-
-  HCSR04loop();
-  distanceCalculation();
-
-  json.set("fields/relay_status", relay_status);
+void sendFirestoreData() {
+  json.set("fields/relay_status", cast_status);
   if (Firebase.Firestore.createDocument(&fbdo, FIREBASE_PROJECT_ID, "", documentPath.c_str(), json.raw())) {
     Serial.println("Relay Status Pushed");
     return;
   } else {
     Serial.println(fbdo.errorReason());
   }
+}
 
+void sendFirebaseData() {
   if (Firebase.ready() && signupOK && (millis() - sendDataPrevMillis > 1000 || sendDataPrevMillis == 0)) {
     // FirebaseJson json;
     sendDataPrevMillis = millis();
@@ -187,5 +166,30 @@ void loop() {
     Firebase.RTDB.pushInt(&fbdo, "test/unix_time", static_cast<int>(currentTime));
     Firebase.RTDB.pushInt(&fbdo, "test/relay_status", relay_status);
     return;
+  }
+
+  //*********************************SETUP*********************************
+
+  void setup() {
+    serialSetup();
+    wifiSetup();
+    timeSetup();
+    firebaseSetup();
+  }
+
+  //*********************************LOOP**********************************
+
+  void loop() {
+    relayControl();
+    FirebaseAuth auth;
+    FirebaseJson json;
+    timeClient.update();
+    unsigned long currentTime = timeClient.getEpochTime();
+
+    HCSR04loop();
+    distanceCalculation();
+
+    sendFirestoreData();
+    sendFirebaseData();
   }
 }
