@@ -9,7 +9,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(waterApp());
+  runApp(const waterApp());
 }
 
 class waterApp extends StatelessWidget {

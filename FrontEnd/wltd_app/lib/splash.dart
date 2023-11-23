@@ -12,9 +12,9 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Timer(Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => HomePage()));
+          context, MaterialPageRoute(builder: (context) => const HomePage()));
     });
     super.initState();
   }
@@ -42,7 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
                   "Water Level Tracking Dashboard",
                   style: GoogleFonts.kanit(
                     textStyle: const TextStyle(
-                      fontSize: 30,
+                      fontSize: 22,
                       color: Color(0xffdb6332),
                     ),
                   ),

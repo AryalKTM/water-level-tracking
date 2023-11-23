@@ -39,7 +39,7 @@ dependencies:
   percent_indicator: ^4.2.3
   google_fonts: ^5.1.0
   firebase_database: ^10.2.4
-  cloud_firestore: ^4.8.4
+  cloud_firestore: ^4.13.2
 
 dev_dependencies:
   flutter_test:
