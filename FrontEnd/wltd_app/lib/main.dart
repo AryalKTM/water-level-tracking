@@ -19,7 +19,7 @@ class waterApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Water Level Tracking Dashboard",
+      title: "Water Level Tracking System",
       home: SplashScreen(),
     );
   }

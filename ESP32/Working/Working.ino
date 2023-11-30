@@ -95,7 +95,7 @@ void relayControl() {
   } else if (distance_cm < safe_distance) {
     relayOFF();
   } else {
-    relayON();
+    relayOFF();
   }
 }
 

@@ -12,6 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  bool light = true;
   double percent = 0;
   String statusDisplay = "ON";
 
@@ -39,12 +40,12 @@ class _HomePageState extends State<HomePage> {
           color: Color(0xfff2f3d9),
         ),
         title: Text(
-          "Water Level Tracking Dashboard",
+          "Water Level Tracking System",
           style: GoogleFonts.kanit(
             textStyle: const TextStyle(
               color: Color(0xffdb6332),
               fontWeight: FontWeight.bold,
-              fontSize: 17,
+              fontSize: 24,
             ),
           ),
         ),
@@ -98,7 +99,7 @@ class _HomePageState extends State<HomePage> {
                     ],
                   ),
                   const SizedBox(
-                    width: 45,
+                    width: 120,
                   ),
                   StreamBuilder<Object>(
                     stream: getDepth(),
@@ -161,27 +162,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const SizedBox(
-                    width: 70,
+                    width: 150,
                   ),
-                  StreamBuilder<Object>(
-                    stream: getStatus(),
-                    builder: (context, snapshot) {
-                      if (snapshot.data != null) {
-                        DatabaseEvent status = snapshot.data as DatabaseEvent;
-                        var returnStatus = motorStatus(status.snapshot.value);
-                        return Text(
-                          returnStatus,
-                          style: GoogleFonts.kanit(
-                            textStyle: const TextStyle(
-                              fontSize: 24,
-                              color: Color(0xfff2f3d9),
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        );
-                      }
-                      return const Text("Loading..");
-                    },
+                  Switch(
+                    value: true,
+                    onChanged: ((value) {
+                      setState(() {
+                        light = value;
+                      });
+                    }),
+                    activeColor: const Color(0xffdb6332),
                   ),
                 ],
               ),

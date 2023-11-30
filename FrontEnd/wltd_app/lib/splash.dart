@@ -39,10 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
                   height: 20,
                 ),
                 Text(
-                  "Water Level Tracking Dashboard",
+                  "Water Level Tracking System",
                   style: GoogleFonts.kanit(
                     textStyle: const TextStyle(
-                      fontSize: 22,
+                      fontSize: 34,
                       color: Color(0xffdb6332),
                     ),
                   ),
